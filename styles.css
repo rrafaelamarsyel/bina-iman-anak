@@ -67,7 +67,6 @@ h1, h2, h3 {
     margin-bottom: 12px;
 }
 
-/* tombol daftarkan anak di navbar */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -96,15 +95,14 @@ h1, h2, h3 {
     background-color: var(--color-forest-dark);
 }
 
-/* navbar */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
-    background-color: rgba(255, 249, 237, 0.9);
-    backdrop-filter: blur(8px);
+    background-color: rgba(255, 249, 237, 0.85);
+    backdrop-filter: blur(10px);
     padding: 0 24px;
 }
 
@@ -130,15 +128,32 @@ h1, h2, h3 {
     color: var(--color-coral);
 }
 
-/* hero */
 .hero {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 40px;
-    padding: 150px 24px 90px;
-    max-width: var(--container-width);
-    margin: 0 auto;
+    padding: 150px 24px 120px;
+    min-height: 650px;
+    background-image: url("assets/natal\ 2025.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-forest-dark);
+    opacity: 0.72;
+}
+
+.hero-text {
+    position: relative;
+    z-index: 1;
+    text-align: center;
 }
 
 .hero-text span {
@@ -155,6 +170,7 @@ h1, h2, h3 {
 .hero-text h1 {
     font-size: 42px;
     margin: 4px 0 20px;
+    color: var(--color-cream);
 }
 
 .hero-text h1 span {
@@ -169,12 +185,15 @@ h1, h2, h3 {
 .hero-text p {
     font-size: 17px;
     max-width: 480px;
-    margin-bottom: 32px;
+    margin: 0 auto 32px;
+    color: var(--color-cream);
+    opacity: 0.9;
 }
 
 .hero-buttons {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 16px;
 }
 
@@ -186,33 +205,27 @@ h1, h2, h3 {
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 15px;
-    background-color: var(--color-forest);
+    background-color: var(--color-coral);
     color: var(--color-white);
     transition: transform 200ms ease, background-color 200ms ease;
 }
 
 .hero-buttons a:hover {
     transform: translateY(-2px);
-    background-color: var(--color-forest-dark);
+    background-color: #c56d55;
 }
 
 .hero-buttons a:last-child {
     background-color: transparent;
-    border: 2px solid var(--color-forest);
-    color: var(--color-forest);
+    border: 2px solid var(--color-cream);
+    color: var(--color-cream);
 }
 
 .hero-buttons a:last-child:hover {
-    background-color: var(--color-forest);
-    color: var(--color-white);
+    background-color: var(--color-cream);
+    color: var(--color-forest-dark);
 }
 
-.hero-photo img {
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-soft);
-}
-
-/* saya mau... */
 .pilihan-saya-mau {
     padding: 80px 0;
 }
@@ -246,7 +259,6 @@ h1, h2, h3 {
     font-size: 30px;
 }
 
-/* kenapa bina iman toasebio */
 .why-bia {
     display: flex;
     flex-wrap: wrap;
@@ -276,6 +288,13 @@ h1, h2, h3 {
     border-radius: var(--radius-md);
     padding: 32px 24px;
     box-shadow: var(--shadow-soft);
+    cursor: pointer;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.why-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 34px rgba(41, 39, 34, 0.14);
 }
 
 .why-badge {
@@ -293,4 +312,117 @@ h1, h2, h3 {
 
 .why-card p {
     opacity: 0.85;
+}
+
+.why-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .why-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(41, 39, 34, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 250ms ease, visibility 250ms ease;
+    z-index: 200;
+    padding: 24px;
+}
+
+.lightbox-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-modal {
+    position: relative;
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    max-width: 480px;
+    width: 100%;
+    padding: 24px;
+    box-shadow: var(--shadow-soft);
+    transform: scale(0.92);
+    transition: transform 250ms ease;
+}
+
+.lightbox-overlay.active .lightbox-modal {
+    transform: scale(1);
+}
+
+.lightbox-img {
+    width: 100%;
+    border-radius: var(--radius-md);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    margin-bottom: 16px;
+    transition: opacity 200ms ease;
+}
+
+.lightbox-info h3 {
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.lightbox-info p {
+    opacity: 0.85;
+    font-size: 14px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 26px;
+    line-height: 1;
+    color: var(--color-dark);
+    cursor: pointer;
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--color-white);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: var(--shadow-soft);
+    font-size: 16px;
+    color: var(--color-forest);
+    cursor: pointer;
+}
+
+.lightbox-prev {
+    left: -20px;
+}
+
+.lightbox-next {
+    right: -20px;
+}
+
+@media (max-width: 560px) {
+    .lightbox-prev {
+        left: 4px;
+    }
+    .lightbox-next {
+        right: 4px;
+    }
 }
